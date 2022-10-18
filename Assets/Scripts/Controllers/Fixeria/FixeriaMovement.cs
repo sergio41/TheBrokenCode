@@ -5,15 +5,20 @@ using static GameEnums;
 
 public class FixeriaMovement : MonoBehaviour
 {
-    public float m_Speed = 12f;                 // How fast Fixeria moves
-    public AudioSource m_MovementAudio;         // Reference to the audio source used to play the movement sounds of Fixeria
+    public Transform m_FeetPosition;
+    public LayerMask groundMask;
+    public float m_Speed = 12f;
+    public AudioSource m_MovementAudio;
+    public float m_JumpTime = 2.0f;
+    public float m_JumpForce = 2.0f;
+    public float m_CheckRadius = 0.15f;
 
-    private Fixeria m_Fixeria;                  // Object with the Fixeria Status
-    private Rigidbody2D m_Rigidbody;            // Reference used to move Fixeria
-    private Animator m_Animator;                // Reference control Fixeria's animations
-    private float m_MovementInputValue;         // The current value of the movement input
+    Rigidbody2D m_Rigidbody;
+    Animator m_Animator;
+    float m_MovementInputValue;
+    float m_JumpTimeCounter;
 
-    void Start()
+    private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
@@ -42,28 +47,45 @@ public class FixeriaMovement : MonoBehaviour
 
     private void Jump()
     {
-        m_Rigidbody.velocity = new Vector2(m_MovementInputValue * m_Speed, m_Rigidbody.velocity.y);
+        switch (Fixeria.Instance.jumpStatus) {
+            case FixeriaJumpEnum.Grounded:
+                m_Animator.SetBool("isJump", false);
+                break;
+            case FixeriaJumpEnum.Jumping:
+                m_JumpTimeCounter -= Time.deltaTime;
+                if (m_JumpTimeCounter > 0f)
+                    Jump(m_JumpForce);
+                else
+                    Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Falling;
+                break;
+            case FixeriaJumpEnum.Falling:
+                var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, groundMask);
+                if(isGrounded)
+                    Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Grounded;
+                break;
+        }
+    }
+
+    private void Jump(float appliedJumpForce)
+    {
+        m_Rigidbody.velocity = Vector2.up * appliedJumpForce;
+        m_Animator.SetBool("isJump", true);
+        m_Animator.SetBool("isRun", false);
     }
 
     private void HandleMovementEffects()
     {              
-        if (Mathf.Abs (m_MovementInputValue) < 0.1f)
+        if (Mathf.Abs (m_MovementInputValue) < 0.1f && m_Animator.GetBool("isRun"))
         {
-            if (m_Animator.GetBool("isRun"))
-            {
-                //m_MovementAudio.clip = null;
-                m_Animator.SetBool("isRun", false);
-                //m_MovementAudio.Play();
-            }
+            //m_MovementAudio.clip = null;
+            m_Animator.SetBool("isRun", false);
+            m_MovementAudio.Play();
         }
-        else
+        else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool("isRun"))
         {
-            if (!m_Animator.GetBool("isRun"))
-            {
-                //m_MovementAudio.clip = m_Steps;
-                m_Animator.SetBool("isRun", true);
-                //m_MovementAudio.Play();
-            }
+            //m_MovementAudio.clip = m_Steps;
+            m_Animator.SetBool("isRun", true);
+            m_MovementAudio.Play();
         }
     }
 
@@ -75,7 +97,22 @@ public class FixeriaMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(m_Fixeria.jumpStatus.Equals(FixeriaJumpEnum.Grounded))
-            m_Fixeria.jumpStatus = FixeriaJumpEnum.Jumping;
+        Fixeria.Instance.jumpStatus = GetJumpStatus(context.action);
+    }
+
+    private FixeriaJumpEnum GetJumpStatus(InputAction inputAction)
+    {
+        if (inputAction.triggered && inputAction.ReadValue<float>() > 0f && Fixeria.Instance.jumpStatus.Equals(FixeriaJumpEnum.Grounded))
+        {
+            //m_MovementAudio.clip = m_Steps;
+            m_MovementAudio.Play();
+            m_JumpTimeCounter = m_JumpTime;
+            return FixeriaJumpEnum.Jumping;
+        }
+        else if (inputAction.ReadValue<float>() == 0f && Fixeria.Instance.jumpStatus.Equals(FixeriaJumpEnum.Jumping))
+        {
+            return FixeriaJumpEnum.Falling;
+        }
+        return Fixeria.Instance.jumpStatus;
     }
 }
