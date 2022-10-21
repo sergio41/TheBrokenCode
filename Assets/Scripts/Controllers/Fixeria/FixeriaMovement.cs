@@ -47,8 +47,11 @@ public class FixeriaMovement : MonoBehaviour
 
     private void Jump()
     {
+        var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, groundMask);
         switch (Fixeria.Instance.jumpStatus) {
             case FixeriaJumpEnum.Grounded:
+                if (!isGrounded)
+                    Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Falling;
                 m_Animator.SetBool("isJump", false);
                 break;
             case FixeriaJumpEnum.Jumping:
@@ -59,7 +62,6 @@ public class FixeriaMovement : MonoBehaviour
                     Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Falling;
                 break;
             case FixeriaJumpEnum.Falling:
-                var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, groundMask);
                 if(isGrounded)
                     Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Grounded;
                 break;
