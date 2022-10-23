@@ -11,6 +11,8 @@ namespace Assets.Scripts.Models
     {
         public FixeriaJumpEnum jumpStatus { get; set; }
         public FixeriaSpellEnum castingStatus { get; set; }
+        public int m_BaseHealth { get; set; }
+        public int m_CurrentHealth { get; set; }
 
         private static Fixeria instance = new Fixeria();
 
@@ -28,6 +30,13 @@ namespace Assets.Scripts.Models
         {
             jumpStatus = FixeriaJumpEnum.Grounded;
             castingStatus = FixeriaSpellEnum.None;
+            m_BaseHealth = 3;
+            m_CurrentHealth = m_BaseHealth - 1;
+        }
+
+        public float HealthPercentage() 
+        {
+            return (float) m_CurrentHealth / (float) m_BaseHealth;
         }
     }
 }

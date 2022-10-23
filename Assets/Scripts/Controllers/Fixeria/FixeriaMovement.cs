@@ -12,6 +12,8 @@ public class FixeriaMovement : MonoBehaviour
     public float m_JumpTime = 2.0f;
     public float m_JumpForce = 2.0f;
     public float m_CheckRadius = 0.15f;
+    [HideInInspector]
+    public bool m_AbleToMove = true;
 
     Rigidbody2D m_Rigidbody;
     Animator m_Animator;
@@ -26,12 +28,20 @@ public class FixeriaMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovementEffects();
-        Jump();
+        if (m_AbleToMove)
+        {
+            HandleMovementEffects();
+            Jump();
+        }
     }
 
     void FixedUpdate()
     {
+        if (!m_AbleToMove)
+        {
+            m_MovementInputValue = 0;
+            m_Animator.SetBool("isRun", false);
+        }
         Move();
     }
 
@@ -83,7 +93,7 @@ public class FixeriaMovement : MonoBehaviour
             m_Animator.SetBool("isRun", false);
             m_MovementAudio.Play();
         }
-        else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool("isRun"))
+        else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool("isRun") && !m_Animator.GetBool("isJump"))
         {
             //m_MovementAudio.clip = m_Steps;
             m_Animator.SetBool("isRun", true);
@@ -93,13 +103,17 @@ public class FixeriaMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        m_Animator.SetBool("isRun", true);
-        m_MovementInputValue = context.ReadValue<float>();
+        if (m_AbleToMove)
+        {
+            m_Animator.SetBool("isRun", true);
+            m_MovementInputValue = context.ReadValue<float>();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Fixeria.Instance.jumpStatus = GetJumpStatus(context.action);
+        if (m_AbleToMove)
+            Fixeria.Instance.jumpStatus = GetJumpStatus(context.action);
     }
 
     private FixeriaJumpEnum GetJumpStatus(InputAction inputAction)
