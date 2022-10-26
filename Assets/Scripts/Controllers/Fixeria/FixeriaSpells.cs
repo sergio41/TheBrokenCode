@@ -1,5 +1,6 @@
 using Assets.Scripts.Models;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static GameEnums;
 
@@ -36,13 +37,13 @@ public class FixeriaSpells : MonoBehaviour
 
     void Fire() 
     {
-        m_Animator.SetTrigger("attack");
+        m_Animator.SetTrigger(GameConstants.ATTACK);
         m_ReadyToFire = false;
         Instantiate(m_Spell, m_FirePosition.position, m_FirePosition.rotation, m_FirePosition.parent);
         m_SpellCooldownCounter = m_SpellCooldown;
     }
 
-    public void OnCastSpell(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
         Fixeria.Instance.castingStatus = GetActionStatus(context.action);
     }

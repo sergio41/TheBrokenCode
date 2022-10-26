@@ -1,5 +1,6 @@
 using Assets.Scripts.Models;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static GameEnums;
 
@@ -40,7 +41,7 @@ public class FixeriaMovement : MonoBehaviour
         if (!m_AbleToMove)
         {
             m_MovementInputValue = 0;
-            m_Animator.SetBool("isRun", false);
+            m_Animator.SetBool(GameConstants.IS_RUN, false);
         }
         Move();
     }
@@ -62,7 +63,7 @@ public class FixeriaMovement : MonoBehaviour
             case FixeriaJumpEnum.Grounded:
                 if (!isGrounded)
                     Fixeria.Instance.jumpStatus = FixeriaJumpEnum.Falling;
-                m_Animator.SetBool("isJump", false);
+                m_Animator.SetBool(GameConstants.IS_JUMP, false);
                 break;
             case FixeriaJumpEnum.Jumping:
                 m_JumpTimeCounter -= Time.deltaTime;
@@ -81,22 +82,22 @@ public class FixeriaMovement : MonoBehaviour
     private void Jump(float appliedJumpForce)
     {
         m_Rigidbody.velocity = Vector2.up * appliedJumpForce;
-        m_Animator.SetBool("isJump", true);
-        m_Animator.SetBool("isRun", false);
+        m_Animator.SetBool(GameConstants.IS_JUMP, true);
+        m_Animator.SetBool(GameConstants.IS_RUN, false);
     }
 
     private void HandleMovementEffects()
     {              
-        if (Mathf.Abs (m_MovementInputValue) < 0.1f && m_Animator.GetBool("isRun"))
+        if (Mathf.Abs (m_MovementInputValue) < 0.1f && m_Animator.GetBool(GameConstants.IS_RUN))
         {
             //m_MovementAudio.clip = null;
-            m_Animator.SetBool("isRun", false);
+            m_Animator.SetBool(GameConstants.IS_RUN, false);
             m_MovementAudio.Play();
         }
-        else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool("isRun") && !m_Animator.GetBool("isJump"))
+        else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool(GameConstants.IS_RUN) && !m_Animator.GetBool(GameConstants.IS_JUMP))
         {
             //m_MovementAudio.clip = m_Steps;
-            m_Animator.SetBool("isRun", true);
+            m_Animator.SetBool(GameConstants.IS_RUN, true);
             m_MovementAudio.Play();
         }
     }
@@ -105,7 +106,7 @@ public class FixeriaMovement : MonoBehaviour
     {
         if (m_AbleToMove)
         {
-            m_Animator.SetBool("isRun", true);
+            m_Animator.SetBool(GameConstants.IS_RUN, true);
             m_MovementInputValue = context.ReadValue<float>();
         }
     }

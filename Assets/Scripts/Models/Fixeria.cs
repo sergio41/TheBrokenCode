@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 using static GameEnums;
 
 namespace Assets.Scripts.Models
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Models
         public FixeriaSpellEnum castingStatus { get; set; }
         public int m_BaseHealth { get; set; }
         public int m_CurrentHealth { get; set; }
+        public Dictionary<string, List<int>> m_VisitedSections { get; set; }
 
         private static Fixeria instance = new Fixeria();
 
@@ -32,6 +34,7 @@ namespace Assets.Scripts.Models
             castingStatus = FixeriaSpellEnum.None;
             m_BaseHealth = 3;
             m_CurrentHealth = m_BaseHealth - 1;
+            m_VisitedSections = new Dictionary<string, List<int>>();
         }
 
         public float HealthPercentage() 
