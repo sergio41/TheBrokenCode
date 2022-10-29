@@ -6,6 +6,8 @@ public static class GameConstants
 
     #region Tags
     public const string PLAYER = "Player";
+    public const string SPELL = "Spell";
+    public const string ENEMY = "Enemy";
     #endregion Tags
 
     #region Scenes
@@ -19,6 +21,8 @@ public static class GameConstants
     public const string IS_RUN = "isRun";
     public const string IS_JUMP = "isJump";
     public const string ATTACK = "attack";
+    public const string DIE = "die";
+    public const string HURT = "hurt";
     public const string DO = "Do";
     #endregion Triggers
 

@@ -7,7 +7,7 @@ using static GameEnums;
 public class FixeriaMovement : MonoBehaviour
 {
     public Transform m_FeetPosition;
-    public LayerMask groundMask;
+    public LayerMask m_GroundMask;
     public float m_Speed = 12f;
     public AudioSource m_MovementAudio;
     public float m_JumpTime = 2.0f;
@@ -58,7 +58,7 @@ public class FixeriaMovement : MonoBehaviour
 
     private void Jump()
     {
-        var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, groundMask);
+        var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, m_GroundMask);
         switch (Fixeria.Instance.jumpStatus) {
             case FixeriaJumpEnum.Grounded:
                 if (!isGrounded)
@@ -119,14 +119,14 @@ public class FixeriaMovement : MonoBehaviour
 
     private FixeriaJumpEnum GetJumpStatus(InputAction inputAction)
     {
-        if (inputAction.triggered && inputAction.ReadValue<float>() > 0f && Fixeria.Instance.jumpStatus.Equals(FixeriaJumpEnum.Grounded))
+        if (inputAction.triggered && inputAction.ReadValue<float>() > 0f && FixeriaJumpEnum.Grounded.Equals(Fixeria.Instance.jumpStatus))
         {
             //m_MovementAudio.clip = m_Steps;
             m_MovementAudio.Play();
             m_JumpTimeCounter = m_JumpTime;
             return FixeriaJumpEnum.Jumping;
         }
-        else if (inputAction.ReadValue<float>() == 0f && Fixeria.Instance.jumpStatus.Equals(FixeriaJumpEnum.Jumping))
+        else if (inputAction.ReadValue<float>() == 0f && FixeriaJumpEnum.Jumping.Equals(Fixeria.Instance.jumpStatus))
         {
             return FixeriaJumpEnum.Falling;
         }

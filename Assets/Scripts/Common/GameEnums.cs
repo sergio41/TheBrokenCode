@@ -17,4 +17,9 @@ public class GameEnums : MonoBehaviour
         Released = 2,
         None = 2
     }
+    public enum EnemyMovementEnum
+    {
+        Waiting = 0,
+        Wandering = 1
+    }
 }

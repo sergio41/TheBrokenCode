@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 2739131537262688715}
   - component: {fileID: 2800085682372392920}
   - component: {fileID: 7979458564882934619}
-  - component: {fileID: -3630234117599346032}
+  - component: {fileID: 8681100299156899859}
+  - component: {fileID: -1881162835257960026}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &-3630234117599346032
+--- !u!114 &8681100299156899859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,8 +115,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 8890206631128105341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b667359546fc69e46b613c089dd69205, type: 3}
+  m_Script: {fileID: 11500000, guid: 8653752c8d6ca4844b3f78821b48b9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_TimeToRelease: 0.4
   m_SpellForce: 10
+  m_SpellDamage: 20
+--- !u!58 &-1881162835257960026
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890206631128105341}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

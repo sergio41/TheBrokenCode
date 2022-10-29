@@ -1,21 +1,22 @@
 using UnityEngine;
 
-public class SpellController : MonoBehaviour
+public abstract class SpellController : MonoBehaviour
 {
     public float m_TimeToRelease = 0.4f;
     public float m_SpellForce = 20f;
+    public int m_SpellDamage = 20;
 
     bool released = false;
     float m_ReleaseTimeCounter;
 
     // Start is called before the first frame update
-    void Start()
+    protected void StartBase()
     {
         m_ReleaseTimeCounter = m_TimeToRelease;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdateBase()
     {
         if(!released) Release();
     }
