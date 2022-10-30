@@ -1,6 +1,5 @@
 using Assets.Scripts.Models;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static GameEnums;
 

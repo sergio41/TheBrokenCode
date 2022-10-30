@@ -34,4 +34,9 @@ public class GameController : MonoBehaviour
         m_PauseScreen.SetActive(m_IsPaused);
         Time.timeScale = m_IsPaused ? 0 : 1;
     }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(GameConstants.MAIN_MENU_SCENE);
+    }
 }
