@@ -44,6 +44,7 @@ public class EnemyHealthController : MonoBehaviour
         m_Animator.SetTrigger(GameConstants.DIE);
         m_Animator.SetBool(GameConstants.IS_RUN, false);
         m_Rigidbody.velocity = new Vector2(0, m_Rigidbody.velocity.y);
+        tag = "Untagged";
     }
 
     public void InitHealthBar()

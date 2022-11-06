@@ -32,7 +32,7 @@ public class SectionExitController : MonoBehaviour
         var fixeriaMovement = FindObjectOfType<FixeriaMovement>();
         var fixeria = fixeriaMovement.gameObject;
         var placeholder = GetComponentInParent<SectionController>().transform.parent;
-        fixeriaMovement.m_AbleToMove = false;
+        fixeriaMovement.MovementControl(false);
 
         yield return new WaitForSeconds(1.75f);
 
@@ -50,6 +50,6 @@ public class SectionExitController : MonoBehaviour
             visitedSection[SceneManager.GetActiveScene().name].Add(m_MapController.m_CurrentSection);
 
         m_LoaderController.TriggerLoading();
-        fixeriaMovement.m_AbleToMove = true;
+        fixeriaMovement.MovementControl(true);
     }
 }

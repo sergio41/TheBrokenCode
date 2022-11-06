@@ -36,6 +36,10 @@ namespace Assets.Scripts.Models
             m_CurrentHealth = m_BaseHealth - 1;
             m_VisitedSections = new Dictionary<string, List<int>>();
         }
+        public static void Reset()
+        {
+            instance = new Fixeria();
+        }
 
         public float HealthPercentage() 
         {

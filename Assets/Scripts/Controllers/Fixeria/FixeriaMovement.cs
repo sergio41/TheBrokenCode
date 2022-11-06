@@ -13,9 +13,8 @@ public class FixeriaMovement : MonoBehaviour
     public float m_JumpTime = 2.0f;
     public float m_JumpForce = 2.0f;
     public float m_CheckRadius = 0.15f;
-    [HideInInspector]
-    public bool m_AbleToMove = true;
-
+        
+    bool m_AbleToMove = true;
     Rigidbody2D m_Rigidbody;
     Animator m_Animator;
     float m_MovementInputValue;
@@ -131,5 +130,17 @@ public class FixeriaMovement : MonoBehaviour
             return FixeriaJumpEnum.Falling;
         }
         return Fixeria.Instance.jumpStatus;
+    }
+
+    public void MovementControl(bool enabled)
+    {
+        m_AbleToMove = enabled;
+        if (enabled)
+            m_Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        else
+        {
+            m_Rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            Fixeria.Instance.jumpStatus = GameEnums.FixeriaJumpEnum.Falling;
+        }
     }
 }

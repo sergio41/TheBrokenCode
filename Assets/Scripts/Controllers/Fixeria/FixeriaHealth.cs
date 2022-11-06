@@ -35,6 +35,16 @@ public class FixeriaHealth : MonoBehaviour
         if (collision.gameObject.tag.Equals(GameConstants.ENEMY))
             DamageByEnemy();
     }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag.Equals(GameConstants.ENEMY))
+            DamageByEnemy();
+    }
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag.Equals(GameConstants.ENEMY))
+            DamageByEnemy();
+    }
 
     void DamageByEnemy() 
     {

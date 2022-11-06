@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     {
         m_MapController = FindObjectOfType<MapController>(true);
         m_MapController.m_CurrentSection = 1;
+        Fixeria.Reset();
         Fixeria.Instance.m_VisitedSections.Add(SceneManager.GetActiveScene().name, new List<int> { m_MapController.m_CurrentSection });
     }
 
