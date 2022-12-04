@@ -8,9 +8,11 @@ public class MenuButtonController : MonoBehaviour, IPointerEnterHandler, IPointe
 {
     string m_OriginalText;
     TextMeshProUGUI m_ButtonText;
+    UISoundController m_Sound;
 
     void Awake()
     {
+        m_Sound = FindObjectOfType<UISoundController>();
         m_ButtonText = GetComponentInChildren<TextMeshProUGUI>(true);
         m_OriginalText = m_ButtonText.text;
     }
@@ -23,6 +25,7 @@ public class MenuButtonController : MonoBehaviour, IPointerEnterHandler, IPointe
     public void OnPointerEnter(PointerEventData eventData)
     {
         m_ButtonText.text = "<" + m_OriginalText + "/>";
+        m_Sound.PlayHover();
     }
 
     public void OnPointerExit(PointerEventData eventData)

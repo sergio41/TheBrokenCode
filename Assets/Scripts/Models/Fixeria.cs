@@ -12,9 +12,14 @@ namespace Assets.Scripts.Models
     {
         public FixeriaJumpEnum jumpStatus { get; set; }
         public FixeriaSpellEnum castingStatus { get; set; }
-        public int m_BaseHealth { get; set; }
-        public int m_CurrentHealth { get; set; }
-        public Dictionary<string, List<int>> m_VisitedSections { get; set; }
+        public int baseHealth { get; set; }
+        public int currentHealth { get; set; }
+        public Dictionary<string, List<int>> visitedSections { get; set; }
+        public Dictionary<string, Dictionary<string, bool>> eventsDone { get; set; }
+        public Dictionary<SpellEnum, int> learntSpells { get; set; }
+        public SpellEnum activeSpellLeft { get; set; }
+        public SpellEnum activeSpellRight { get; set; }
+        public List<ItemEnum> inventory { get; set; }
 
         private static Fixeria instance = new Fixeria();
 
@@ -32,9 +37,19 @@ namespace Assets.Scripts.Models
         {
             jumpStatus = FixeriaJumpEnum.Grounded;
             castingStatus = FixeriaSpellEnum.None;
-            m_BaseHealth = 3;
-            m_CurrentHealth = m_BaseHealth - 1;
-            m_VisitedSections = new Dictionary<string, List<int>>();
+            baseHealth = 5;
+            currentHealth = baseHealth;
+            visitedSections = new Dictionary<string, List<int>>();
+            eventsDone = new Dictionary<string, Dictionary<string, bool>>();
+            learntSpells = new Dictionary<SpellEnum, int>() {
+                { SpellEnum.PRINTIO, 1},
+                { SpellEnum.INSTACER, 1}/*,
+                { SpellEnum.LOOPFOR, 3},
+                { SpellEnum.AIFELSEN, 1}*/
+            };
+            inventory = new List<ItemEnum>() { ItemEnum.SPELLBOOK, ItemEnum.RESOURCES };
+            activeSpellRight = SpellEnum.PRINTIO;
+            activeSpellLeft = SpellEnum.INSTACER;
         }
         public static void Reset()
         {
@@ -43,7 +58,7 @@ namespace Assets.Scripts.Models
 
         public float HealthPercentage() 
         {
-            return (float) m_CurrentHealth / (float) m_BaseHealth;
+            return (float) currentHealth / (float) baseHealth;
         }
     }
 }

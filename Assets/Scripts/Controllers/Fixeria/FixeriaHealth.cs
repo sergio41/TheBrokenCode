@@ -1,21 +1,23 @@
 using Assets.Scripts.Models;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using static GameEnums;
 
 public class FixeriaHealth : MonoBehaviour
 {
     public float m_InvulnerabilityTime;
+    public Transform m_FixeriaCenter;
+    public AudioClip m_Hurt;
+    public AudioClip m_Die;
 
     Rigidbody2D m_Rigidbody;
     Animator m_Animator;
     float m_CurrentInvulnerabilityTime;
+    AudioSource m_AudioSource;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -26,23 +28,25 @@ public class FixeriaHealth : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals(GameConstants.ENEMY))
+        if (collision.gameObject.CompareTag(GameConstants.ENEMY))
             DamageByEnemy();
     }
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals(GameConstants.ENEMY))
+        if (collision.gameObject.CompareTag(GameConstants.ENEMY))
             DamageByEnemy();
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag.Equals(GameConstants.ENEMY))
+        if (col.gameObject.CompareTag(GameConstants.ENEMY))
             DamageByEnemy();
     }
+
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.tag.Equals(GameConstants.ENEMY))
+        if (col.gameObject.CompareTag(GameConstants.ENEMY))
             DamageByEnemy();
     }
 
@@ -50,13 +54,17 @@ public class FixeriaHealth : MonoBehaviour
     {
         if (m_CurrentInvulnerabilityTime <= 0)
         {
-            Fixeria.Instance.m_CurrentHealth -= 1;
+            Fixeria.Instance.currentHealth -= 1;
             m_CurrentInvulnerabilityTime = m_InvulnerabilityTime;
-            if (Fixeria.Instance.m_CurrentHealth > 0)
+            if (Fixeria.Instance.currentHealth > 0)
+            {
                 m_Animator.SetTrigger(GameConstants.HURT);
+                m_AudioSource.PlayOneShot(m_Hurt);
+            }
             else
             {
                 m_Animator.SetTrigger(GameConstants.DIE);
+                m_AudioSource.PlayOneShot(m_Die);
                 GetComponent<FixeriaMovement>().enabled = false;
                 GetComponent<FixeriaSpells>().enabled = false;
                 gameObject.layer = 31;

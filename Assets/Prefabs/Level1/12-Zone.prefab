@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 692578753403425565}
   - component: {fileID: 692578753403425554}
   - component: {fileID: 6757151554075451768}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: 12-Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4780,11 +4780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3383822776133565195, guid: e113a6d1d1085b343809ccb01745ae6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1
+      value: -2.02
       objectReference: {fileID: 0}
     - target: {fileID: 3383822776133565195, guid: e113a6d1d1085b343809ccb01745ae6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.06
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3383822776133565195, guid: e113a6d1d1085b343809ccb01745ae6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4908,7 +4908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3383822776133565195, guid: e113a6d1d1085b343809ccb01745ae6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.06
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3383822776133565195, guid: e113a6d1d1085b343809ccb01745ae6a, type: 3}
       propertyPath: m_LocalPosition.z

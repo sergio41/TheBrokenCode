@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 692578753403425565}
   - component: {fileID: 692578753403425554}
   - component: {fileID: 6757151554075451768}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: 11-Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4742,6 +4742,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6462248971334195842}
     m_Modifications:
+    - target: {fileID: 3055950908424594926, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9c0eba1931d318141927a3b769c9afbd, type: 3}
+    - target: {fileID: 4129213483607166077, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
+      propertyPath: m_Item
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
       propertyPath: m_Name
       value: Chest Silver
@@ -4790,6 +4798,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7427698265703430059, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9c0eba1931d318141927a3b769c9afbd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f2681b23c23afc4fbb43c6dca9f41f9, type: 3}
 --- !u!4 &1796114019910232260 stripped

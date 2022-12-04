@@ -1,20 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemySpellEffectController : MonoBehaviour
 {
-    public float m_BarVisibleTime;
-    public Slider m_HealthBar;
+    public GameObject m_HealthBar;
 
-    Animator m_Animator;
-    Rigidbody2D m_Rigidbody;
     float m_BarVisibleTimeLeft;
 
-    void Start()
-    {
-        m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody2D>();
-    }
 
     void Update()
     {
@@ -24,9 +15,9 @@ public class EnemySpellEffectController : MonoBehaviour
             m_HealthBar.gameObject.SetActive(false);
     }
 
-    public void ShowHealth()
+    public void ShowHealth(float barVisibleTime)
     {
-        m_BarVisibleTimeLeft = m_BarVisibleTime;
+        m_BarVisibleTimeLeft = barVisibleTime;
         m_HealthBar.gameObject.SetActive(true);
     }
 }

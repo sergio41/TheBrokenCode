@@ -5,7 +5,6 @@ public class EnemyHealthController : MonoBehaviour
 {
     public int m_Health;
     public Slider m_HealthBar;
-    public float m_BarVisibleTime;
 
     Animator m_Animator;
     Rigidbody2D m_Rigidbody;
@@ -22,7 +21,7 @@ public class EnemyHealthController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag.Equals(GameConstants.SPELL))
+        if (collider.gameObject.CompareTag(GameConstants.SPELL))
         {
             var controller = collider.gameObject.GetComponent<SpellController>();
             Damage(controller.m_SpellDamage);
@@ -42,7 +41,6 @@ public class EnemyHealthController : MonoBehaviour
     private void Die() 
     {
         m_Animator.SetTrigger(GameConstants.DIE);
-        m_Animator.SetBool(GameConstants.IS_RUN, false);
         m_Rigidbody.velocity = new Vector2(0, m_Rigidbody.velocity.y);
         tag = "Untagged";
     }

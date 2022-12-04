@@ -9,7 +9,8 @@ public class FixeriaMovement : MonoBehaviour
     public Transform m_FeetPosition;
     public LayerMask m_GroundMask;
     public float m_Speed = 12f;
-    public AudioSource m_MovementAudio;
+    public AudioClip m_Steps;
+    public AudioClip m_Jump;
     public float m_JumpTime = 2.0f;
     public float m_JumpForce = 2.0f;
     public float m_CheckRadius = 0.15f;
@@ -19,11 +20,13 @@ public class FixeriaMovement : MonoBehaviour
     Animator m_Animator;
     float m_MovementInputValue;
     float m_JumpTimeCounter;
+    AudioSource m_AudioSource;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -89,15 +92,26 @@ public class FixeriaMovement : MonoBehaviour
     {              
         if (Mathf.Abs (m_MovementInputValue) < 0.1f && m_Animator.GetBool(GameConstants.IS_RUN))
         {
-            //m_MovementAudio.clip = null;
             m_Animator.SetBool(GameConstants.IS_RUN, false);
-            m_MovementAudio.Play();
         }
         else if (Mathf.Abs(m_MovementInputValue) >= 0.1f && !m_Animator.GetBool(GameConstants.IS_RUN) && !m_Animator.GetBool(GameConstants.IS_JUMP))
         {
-            //m_MovementAudio.clip = m_Steps;
             m_Animator.SetBool(GameConstants.IS_RUN, true);
-            m_MovementAudio.Play();
+        }
+
+        var isGrounded = Physics2D.OverlapCircle(m_FeetPosition.position, m_CheckRadius, m_GroundMask);
+        if (m_Animator.GetBool(GameConstants.IS_RUN))
+        {
+            var alreadyPlayingSteps = m_Steps.Equals(m_AudioSource.clip);
+            m_AudioSource.clip = isGrounded ? m_Steps : null;
+            m_AudioSource.loop = isGrounded;
+            if (!alreadyPlayingSteps)
+                m_AudioSource.Play();
+        }
+        else {
+            m_AudioSource.clip = null;
+            m_AudioSource.loop = false;
+            m_AudioSource.Play();
         }
     }
 
@@ -120,8 +134,7 @@ public class FixeriaMovement : MonoBehaviour
     {
         if (inputAction.triggered && inputAction.ReadValue<float>() > 0f && FixeriaJumpEnum.Grounded.Equals(Fixeria.Instance.jumpStatus))
         {
-            //m_MovementAudio.clip = m_Steps;
-            m_MovementAudio.Play();
+            m_AudioSource.PlayOneShot(m_Jump);
             m_JumpTimeCounter = m_JumpTime;
             return FixeriaJumpEnum.Jumping;
         }

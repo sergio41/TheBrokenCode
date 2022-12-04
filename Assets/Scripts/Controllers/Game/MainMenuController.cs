@@ -11,42 +11,44 @@ public class MainMenuController : MonoBehaviour
     public AudioMixer m_Mixer;
     public Slider m_AudioVolume;
 
+    UISoundController m_Sound;
+
     void Start()
     {
+        m_Sound = GetComponent<UISoundController>();
         m_Mixer.GetFloat("MusicVolume", out float actualVolume);
         m_AudioVolume.value = Mathf.Pow(10, actualVolume / 20);
     }
 
-    void Update()
-    {
-
-    }
-
     public void StartNewGame()
     {
-        PlayerPrefs.SetString(GameConstants.SCENE_TO_LOAD, GameConstants.FIRST_LEVEL_SCENE);
+        m_Sound.PlaySelect();
         SceneManager.LoadScene(GameConstants.CINEMATIC_SCENE);
     }
 
     public void OpenSettings()
     {
+        m_Sound.PlaySelect();
         m_Menu.SetActive(false);
         m_Settings.SetActive(true);
     }
 
     public void CloseSettings()
     {
+        m_Sound.PlaySelect();
         m_Menu.SetActive(true);
         m_Settings.SetActive(false);
     }
 
     public void OpenCredits()
     {
+        m_Sound.PlaySelect();
         SceneManager.LoadScene(GameConstants.CREDITS_SCENE);
     }
 
     public void EndGame()
     {
+        m_Sound.PlaySelect();
         Application.Quit();
     }
 

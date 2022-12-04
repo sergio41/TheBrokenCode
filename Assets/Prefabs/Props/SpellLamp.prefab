@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3226521009140389270
 Transform:
   m_ObjectHideFlags: 0
@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3226521009676847262}
   - component: {fileID: 7433164517422605037}
+  - component: {fileID: 6441290055982145456}
   m_Layer: 0
   m_Name: SpellLamp
   m_TagString: Untagged
@@ -142,6 +143,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &6441290055982145456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226521009676847256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89e2e48e28b19547a54e0e4e71c8d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LampOn: {fileID: 3226521009140389271}
+  m_LampOff: {fileID: 4646918135967869245}
+  m_LampGlow: {fileID: 3693432273548653689}
 --- !u!1 &3693432273548653689
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6276803157419383290
 Transform:
   m_ObjectHideFlags: 0
@@ -4974,7 +4990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5714601721274256936
 Transform:
   m_ObjectHideFlags: 0

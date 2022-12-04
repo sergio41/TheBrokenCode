@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 692578753403425565}
   - component: {fileID: 692578753403425554}
   - component: {fileID: 6757151554075451768}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: 19-Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5013,6 +5013,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6462248971334195842}
     m_Modifications:
+    - target: {fileID: 51122353221706785, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0825dfa25de4551469e65496af7b3c71, type: 3}
+    - target: {fileID: 425505657922695767, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114324403978362128, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0825dfa25de4551469e65496af7b3c71, type: 3}
+    - target: {fileID: 2633518473829141303, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633518473829141303, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498803430789012331, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_text
+      value: "Conjuro bifurcador. Al contacto con los enemigos libera dos hechizos
+        nuevos que actuan por su cuenta. Otros magos los utilizan para, en su d\xEDa
+        a d\xEDa, cubrir diferentes escenarios asegurando que uno de los hechizos
+        generados cumpla la funci\xF3n deseada.\nDa\xF1o {0} - Se divide {1} veces"
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
       propertyPath: m_Name
       value: ChestGolden

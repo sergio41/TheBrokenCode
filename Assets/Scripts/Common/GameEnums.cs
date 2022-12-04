@@ -22,4 +22,17 @@ public class GameEnums : MonoBehaviour
         Waiting = 0,
         Wandering = 1
     }
+    public enum SpellEnum
+    {
+        PRINTIO,
+        AIFELSEN,
+        LOOPFOR,
+        INSTACER
+    }
+    public enum ItemEnum
+    {
+        SPELLBOOK,
+        BRIDGE_SCHEME,
+        RESOURCES
+    }
 }
