@@ -8,6 +8,7 @@ public class FirstLevelBossController : SectionEventController
     public GameObject m_Chest;
     public GameObject m_Portal;
     public GameObject m_Tutorial;
+    public GameObject m_BossLive;
     public TextMeshProUGUI m_TutorialCounterBackText;
     public float m_TimeTutorialActive;
     public AudioClip m_BattleMusic;
@@ -58,6 +59,7 @@ public class FirstLevelBossController : SectionEventController
                 m_Door.SetActive(false);
                 m_Chest.SetActive(true);
                 m_Portal.SetActive(true);
+                m_BossLive.SetActive(false);
                 m_AudioSource.clip = m_OriginalBackMusic;
                 m_AudioSource.Play();
                 SetEventDone();

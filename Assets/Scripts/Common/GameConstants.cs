@@ -7,6 +7,7 @@ public static class GameConstants
 {
     #region PlayerPrefs
     public const string SCENE_TO_LOAD = "SceneToLoad";
+    public const string SLOT_TO_LOAD = "SlotToLoad";
     #endregion PlayerPrefs
 
     #region Tags
@@ -45,11 +46,11 @@ public static class GameConstants
             { ItemEnum.BRIDGE_SCHEME, "Esquema de un puente. Usando este plano junto con el hechizo Instacer se pueden crear nuevos puentes donde haya alguna lámpara de conjuros apagada." },
             { ItemEnum.RESOURCES, "Los recursos son materiales valiosos para Fixeria que le permiten aumentar su capacidad y realizar conjuros aún más poderosos." }
         };
-    public static Dictionary<SpellEnum, string> spellDescriptions = new Dictionary<SpellEnum, string>(){
-            { SpellEnum.PRINTIO, "Hechizo básico de Fixeria. Algunos hechizeros lo utilizan para obtener datos del funcionamiento de artilugios o procesos de manera visual. Fixeria lo utiliza para dañar a sus enemigos y monitorizar cuanta vida les resta para ser vencidos.\n\nDaño {0}\nMuestra la vida durante {1} segundos" },
-            { SpellEnum.AIFELSEN, "Conjuro bifurcador o condicional. Al contacto con los enemigos libera dos hechizos nuevos que actuan por su cuenta. Otros magos los utilizan para, en su día a día, cubrir diferentes escenarios asegurando que uno de los hechizos generados cumpla la función deseada.\n\nDaño {0}\nSe divide {1} veces" },
-            { SpellEnum.LOOPFOR, "Hechizo iterante. Cuando impacta con algún obstáculo o enemigo permanece en él repitiendo un bucle alrededor del punto de impacto. Se suele utilizar para realizar tareas repetitivas y evitar tener que realizar varios hechizos consecutivos.\n\nDaño {0}\nItera durante {1} segundos" },
-            { SpellEnum.INSTACER, "Instrucción creadora. Con los esquemas adecuados permite a Fixeria crear objetos basados en ellos. Gracias al modelado de la realidad mediante los esquemas se permite crear replicas virtuales de los objetos las veces que sean necesarias.\n\nNo produce daño." }
+    public static Dictionary<SpellEnum, string[]> spellDescriptions = new Dictionary<SpellEnum, string[]>(){
+            { SpellEnum.PRINTIO, new string[]{"Hechizo básico de Fixeria. Algunos hechizeros lo utilizan para obtener datos del funcionamiento de artilugios o procesos de manera visual. Nuestra heroína lo utiliza para dañar a sus enemigos y monitorizar cuánta vida les resta para ser vencidos.\n\n", "Daño {0}\nMuestra la vida durante {1} segundos" } },
+            { SpellEnum.AIFELSEN, new string[]{"Conjuro bifurcador o condicional. Al contacto con los enemigos libera dos hechizos nuevos que actuan por su cuenta. Otros magos los utilizan para, en su día a día, cubrir diferentes escenarios asegurando que uno de los hechizos generados cumpla la función deseada.\n\n", "Daño {0}\nSe divide {1} veces" } },
+            { SpellEnum.LOOPFOR, new string[]{"Hechizo iterante. Cuando impacta con algún obstáculo o enemigo permanece en él repitiendo un bucle alrededor del punto de impacto. Se suele utilizar para realizar tareas repetitivas y evitar tener que realizar varios hechizos consecutivos.\n\n", "Daño {0}\nItera durante {1} segundos" } },
+            { SpellEnum.INSTACER, new string[]{ "Instrucción creadora. Con los esquemas adecuados permite a Fixeria crear objetos basados en ellos. Gracias al modelado de la realidad, mediante los esquemas se permite crear réplicas virtuales de los objetos las veces que sean necesarias.\n\n", "No produce daño." } }
     };
 
     public static Dictionary<int, SpellParameters> printioLevels = new Dictionary<int, SpellParameters> { 
@@ -72,6 +73,9 @@ public static class GameConstants
         { SpellEnum.AIFELSEN, aifelsenLevels },
         { SpellEnum.LOOPFOR, loopforLevels }
     };
+    public static string SAVE_SLOT_SECTION = "Sección: {0}";
+    public static string SAVE_SLOT_CONFIRMATION = "Seguro que quieres guardar la partida en la ranura {0}{1}?";
+    public static string SAVE_SLOT_OVERRIDE = " y sobreescribir los datos existentes";
     #endregion Game descriptions
 
     #region Utils
@@ -79,9 +83,9 @@ public static class GameConstants
     #endregion Utils
 
     #region History
-    public const string FIRST_CINEMATIC = "En el lejano mundo de Sistemia, todo esta en armonía y calma. Cada ser tiene un propósito y convive pacíficamente con los demás. Es un reino rebosante de felicidad. O al menos lo era...|" +
-        "Hace no mucho, las fuerzas del mal, formadas por monstruos llamados bugs, irrumpieron y alteraron el orden establecido causando que la armonía y felicidad que reinaban comenzaran a colapsar. El cerebro detrás de esta invasión aún se desconoce, pero si se sabe que la vanguardia del enemigo es comandada por Nullo, uno de sus generales.|" +
-        "Desesperado, el gobierno de Sistemia no tiene más remedio que recurrir a Fixeria. Una joven guerrera y hechizera que deberá buscar y acabar con los generales, mientras investiga quien es el culpable de esta invasión.&Sin embargo, a pesar de ser ya muy poderosa, Fixeria deberá desarrollar su poder a la vez que intenta cumplir con sus objetivos, de otro modo es posible que fracase.|" +
+    public const string FIRST_CINEMATIC = "En el lejano mundo de Sistemia, todo está en armonía y calma. Cada ser tiene un propósito y convive pacíficamente con los demás. Es un reino rebosante de felicidad. O al menos lo era...|" +
+        "Hace no mucho las fuerzas del mal, formadas por monstruos llamados bugs, irrumpieron y alteraron el orden establecido causando que la armonía y felicidad que reinaban comenzaran a colapsar. El cerebro detrás de esta invasión aún se desconoce, pero sí se sabe que la vanguardia del enemigo es comandada por Nullo, uno de sus generales.|" +
+        "Desesperado, el gobierno de Sistemia no tiene más remedio que recurrir a Fixeria. Esta joven guerrera y hechizera deberá buscar y acabar con los generales, mientras investiga quién es el culpable de esta invasión.&Sin embargo, a pesar de ser ya muy poderosa, Fixeria deberá desarrollar su poder a la vez que intenta cumplir con sus objetivos, de otro modo es posible que fracase.|" +
         "El primer objetivo será la caverna neblinosa, donde se rumorea que se esconde Nullo, el primer gran rival al que deberá hacer frente nuestra joven heroína y que servirá de punto de inicio a su gran aventura por salvar el reino...";
     #endregion History
 

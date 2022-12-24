@@ -44,6 +44,7 @@ public class NulloHealthController : MonoBehaviour
         tag = "Untagged";
         m_AudioSource.PlayOneShot(m_Die);
         m_HealthBar.gameObject.SetActive(false);
+        m_HealthBar.transform.parent.gameObject.SetActive(false);
     }
 
     public void InitHealthBar()

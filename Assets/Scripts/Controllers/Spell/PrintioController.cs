@@ -5,15 +5,13 @@ public class PrintioController : SpellController
 {
     float m_BarVisibleTime;
 
-    // Start is called before the first frame update
     void Start()
     {
-        m_SpellDamage = GameConstants.aifelsenLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.PRINTIO]].damage;
-        m_BarVisibleTime = GameConstants.aifelsenLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.PRINTIO]].specialParameter;
+        m_SpellDamage = GameConstants.printioLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.PRINTIO]].damage;
+        m_BarVisibleTime = GameConstants.printioLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.PRINTIO]].specialParameter;
         StartBase();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         FixedUpdateBase();

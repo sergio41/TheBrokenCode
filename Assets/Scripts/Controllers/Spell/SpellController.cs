@@ -12,13 +12,11 @@ public abstract class SpellController : MonoBehaviour
     bool released = false;
     float m_ReleaseTimeCounter;
 
-    // Start is called before the first frame update
     protected void StartBase()
     {
         m_ReleaseTimeCounter = m_TimeToRelease;
     }
 
-    // Update is called once per frame
     protected void FixedUpdateBase()
     {
         if(!released) Release();
@@ -33,7 +31,7 @@ public abstract class SpellController : MonoBehaviour
             rigidbody.velocity = m_SpellForce * transform.right;
             rigidbody.constraints = RigidbodyConstraints2D.None;
             rigidbody.simulated = true;
-            transform.parent = null;
+            transform.parent = FindObjectOfType<SectionController>().transform;
             released = true;
         }
     }
@@ -54,7 +52,7 @@ public abstract class SpellController : MonoBehaviour
 
     protected void DestroySpell() 
     {
-        Instantiate(m_Explosion, transform.position, transform.rotation);
+        Instantiate(m_Explosion, transform.position, transform.rotation, transform.parent);
         Destroy(gameObject);
     }
 

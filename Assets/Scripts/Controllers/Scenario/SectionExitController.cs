@@ -32,7 +32,7 @@ public class SectionExitController : MonoBehaviour
         var fixeriaMovement = FindObjectOfType<FixeriaMovement>();
         var fixeria = fixeriaMovement.gameObject;
         var placeholder = GetComponentInParent<SectionController>().transform.parent;
-        fixeriaMovement.MovementControl(false);
+        fixeriaMovement.MovementControl(false, false);
 
         yield return new WaitForSeconds(1.75f);
 
@@ -45,11 +45,9 @@ public class SectionExitController : MonoBehaviour
         fixeria.transform.rotation = positionForFixeria.rotation;
         sectionLoaded.GetComponentInChildren<CinemachineVirtualCamera>().Follow = fixeria.transform;
         m_MapController.m_CurrentSection = sectionController.m_SectionNumber;
-        var visitedSection = Fixeria.Instance.visitedSections[SceneManager.GetActiveScene().name];
-        if (!visitedSection.Contains(m_MapController.m_CurrentSection))
-            visitedSection.Add(m_MapController.m_CurrentSection);
+        if (!Fixeria.Instance.visitedSections.Contains($"{SceneManager.GetActiveScene().name}#{m_MapController.m_CurrentSection}"))
+            Fixeria.Instance.visitedSections.Add($"{SceneManager.GetActiveScene().name}#{m_MapController.m_CurrentSection}");
 
         m_LoaderController.TriggerLoading();
-        fixeriaMovement.MovementControl(true);
     }
 }

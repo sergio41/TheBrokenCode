@@ -51,12 +51,12 @@ public class FixeriaSpells : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        Fixeria.Instance.castingStatus = GetActionStatus(context.action, true);
+        Fixeria.Instance.castingStatus = GetActionStatus(context.action, false);
     }
 
     public void OnAttack2(InputAction.CallbackContext context)
     {
-        Fixeria.Instance.castingStatus = GetActionStatus(context.action, false);
+        Fixeria.Instance.castingStatus = GetActionStatus(context.action, true);
     }
 
     FixeriaSpellEnum GetActionStatus(InputAction inputAction, bool isLeft)
@@ -69,7 +69,6 @@ public class FixeriaSpells : MonoBehaviour
             m_SpellToCast = isLeft ? Fixeria.Instance.activeSpellLeft : Fixeria.Instance.activeSpellRight;
             return FixeriaSpellEnum.Casting;
         }
-        //else if (inputAction.ReadValue<float>() > 0f) return FixeriaSpellEnum.Charging;
         else if (inputAction.ReadValue<float>() == 0f) return FixeriaSpellEnum.Released;
         else return FixeriaSpellEnum.None;
     }

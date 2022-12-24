@@ -9,8 +9,12 @@ public abstract class SectionEventController : MonoBehaviour
 {
     public string m_EventName;
 
+    UISoundController m_Sound;
+
     protected void CheckEvent()
     {
+        if(m_Sound == null)
+            m_Sound = FindObjectOfType<UISoundController>();
         var eventsDone = Fixeria.Instance.eventsDone[SceneManager.GetActiveScene().name];
         if (!eventsDone.ContainsKey(m_EventName))
             eventsDone.Add(m_EventName, false);
@@ -22,6 +26,7 @@ public abstract class SectionEventController : MonoBehaviour
 
     protected void SetEventDone() 
     {
+        m_Sound.PlaySuccess();
         Fixeria.Instance.eventsDone[SceneManager.GetActiveScene().name][m_EventName] = true;
     }
 }

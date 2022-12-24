@@ -21,8 +21,8 @@ public class LoopforController : SpellController
 
     void Start()
     {
-        m_SpellDamage = GameConstants.aifelsenLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.LOOPFOR]].damage;
-        m_TimeIterating = GameConstants.aifelsenLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.LOOPFOR]].specialParameter;
+        m_SpellDamage = GameConstants.loopforLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.LOOPFOR]].damage;
+        m_TimeIterating = GameConstants.loopforLevels[Fixeria.Instance.learntSpells[GameEnums.SpellEnum.LOOPFOR]].specialParameter;
         m_Collider = GetComponent<CircleCollider2D>();
         StartBase();
     }

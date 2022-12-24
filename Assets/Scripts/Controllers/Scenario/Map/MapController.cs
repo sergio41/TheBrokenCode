@@ -14,7 +14,7 @@ public class MapController : MonoBehaviour
     void OnEnable()
     {
         m_MapSectionList = new List<MapSectionController>(GetComponentsInChildren<MapSectionController>(true));
-        m_MapSectionList.ForEach(section => section.gameObject.SetActive(Fixeria.Instance.visitedSections[SceneManager.GetActiveScene().name].Contains(section.m_SectionNumber)));
+        m_MapSectionList.ForEach(section => section.gameObject.SetActive(Fixeria.Instance.visitedSections.Contains($"{SceneManager.GetActiveScene().name}#{section.m_SectionNumber}")));
         m_MapSectionList.ForEach(section => section.SetPlayerLocationVisibility(m_CurrentSection.Equals(section.m_SectionNumber)));
     }
 }

@@ -145,7 +145,7 @@ public class FixeriaMovement : MonoBehaviour
         return Fixeria.Instance.jumpStatus;
     }
 
-    public void MovementControl(bool enabled)
+    public void MovementControl(bool enabled, bool disableSound)
     {
         m_AbleToMove = enabled;
         if (enabled)
@@ -154,6 +154,12 @@ public class FixeriaMovement : MonoBehaviour
         {
             m_Rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             Fixeria.Instance.jumpStatus = GameEnums.FixeriaJumpEnum.Falling;
+            if (disableSound) 
+            {
+                m_AudioSource.clip = null;
+                m_AudioSource.loop = false;
+                m_AudioSource.Play();
+            }
         }
     }
 }

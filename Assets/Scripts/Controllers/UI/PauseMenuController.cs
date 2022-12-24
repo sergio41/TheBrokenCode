@@ -29,7 +29,7 @@ public class PauseMenuController : MonoBehaviour
         var map = FindObjectOfType<MapController>(true);
         map.transform.SetParent(m_MapTab.transform);
         map.gameObject.SetActive(true);
-        m_Mixer.GetFloat("MusicVolume", out float actualVolume);
+        m_Mixer.GetFloat(GameConstants.MUSIC_VOLUME, out float actualVolume);
         m_AudioVolume.value = Mathf.Pow(10, actualVolume / 20);
     }
 
@@ -40,7 +40,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void AdjustVolume(float sliderValue)
     {
-        m_Mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        m_Mixer.SetFloat(GameConstants.MUSIC_VOLUME, Mathf.Log10(sliderValue) * 20);
     }
 
     public void OpenMap(bool doSound)

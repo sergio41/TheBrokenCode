@@ -9,8 +9,11 @@ public class InstacerMagicLampController : MagicLampController
     public ItemEnum m_SchemeRequired;
     public GameObject m_ObjectToInstance;
 
+    UISoundController m_Sound;
+
     private void Start()
     {
+        m_Sound = FindObjectOfType<UISoundController>();
         var eventsDone = Fixeria.Instance.eventsDone[SceneManager.GetActiveScene().name];
         if (!eventsDone.ContainsKey(m_EventName))
             eventsDone.Add(m_EventName, false);
@@ -27,6 +30,7 @@ public class InstacerMagicLampController : MagicLampController
         OnSpellImpactBase(collider, isExpected);
         if (isExpected)
         {
+            m_Sound.PlaySuccess();
             m_ObjectToInstance.SetActive(true);
             Fixeria.Instance.eventsDone[SceneManager.GetActiveScene().name][m_EventName] = true;
         }
