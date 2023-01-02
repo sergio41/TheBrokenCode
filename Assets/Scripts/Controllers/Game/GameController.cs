@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     bool m_IsPaused;
     MapController m_MapController;
     FixeriaHealth m_Fixeria;
+    FixeriaMovement m_FixeriaMovement;
     int m_SlotToSave;
     FileDataHandler m_DataHandler;
     UISoundController m_Sound;
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour
     {
         m_MapController = FindObjectOfType<MapController>(true);
         m_Fixeria = FindObjectOfType<FixeriaHealth>(true);
+        m_FixeriaMovement = FindObjectOfType<FixeriaMovement>(true);
         m_Sound = FindObjectOfType<UISoundController>();
         m_DataHandler = new FileDataHandler();
         var sectionToLoad = 1;
@@ -77,6 +79,7 @@ public class GameController : MonoBehaviour
             FindObjectsOfType<TutorialController>().ToList().ForEach(tutorial => { tutorial.gameObject.SetActive(false); Time.timeScale = 1; });
             m_IsPaused = !m_IsPaused;
             m_PauseScreen.SetActive(m_IsPaused);
+            m_FixeriaMovement.MovementControl(!m_IsPaused, m_IsPaused);
             Time.timeScale = m_IsPaused ? 0 : 1;
         }
     }
@@ -142,6 +145,7 @@ public class GameController : MonoBehaviour
             }
             m_SaveScreen.SetActive(true);
             Fixeria.Instance.currentHealth = Fixeria.Instance.baseHealth;
+            m_FixeriaMovement.MovementControl(false, true);
             Time.timeScale = 0;
         }
     }
@@ -150,6 +154,7 @@ public class GameController : MonoBehaviour
     {
         m_Sound.PlaySelect();
         m_SaveScreen.SetActive(false);
+        m_FixeriaMovement.MovementControl(true, false);
         Time.timeScale = 1;
     }
 
