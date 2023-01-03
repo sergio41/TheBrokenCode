@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
     public void OnChangeLeftSpell(InputAction.CallbackContext context)
     {
         var value = context.action.ReadValue<float>();
-        if (context.action.triggered && value != 0f)
+        if (context.action.triggered && value != 0f && !m_PauseScreen.activeSelf)
         {
             
             Fixeria.Instance.activeSpellLeft = GetNextSpell(value, Fixeria.Instance.activeSpellLeft);
@@ -98,7 +98,7 @@ public class GameController : MonoBehaviour
     public void OnChangeRightSpell(InputAction.CallbackContext context)
     {
         var value = context.action.ReadValue<float>();
-        if (context.action.triggered && value != 0f)
+        if (context.action.triggered && value != 0f && !m_PauseScreen.activeSelf)
         {
             Fixeria.Instance.activeSpellRight = GetNextSpell(value, Fixeria.Instance.activeSpellRight);
             m_RightSpell.sprite = m_SpellImages.Find(image => image.spell.Equals(Fixeria.Instance.activeSpellRight)).spellImage;
